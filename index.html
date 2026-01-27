@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación de Bautizo</title>
+
+<style>
+:root {
+  --color-principal: #c9a96e;
+  --color-texto: #5a4632;
+  --color-fondo: #fdfcfb;
+}
+
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background-image: url('fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.95);
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,.2);
+}
+
+h1 { color: var(--color-texto); }
+h2 { color: var(--color-principal); }
+
+p {
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+.countdown {
+  margin: 20px 0;
+  font-size: 1.1em;
+  color: var(--color-principal);
+}
+
+a {
+  display: block;
+  margin: 10px auto;
+  padding: 12px 20px;
+  border-radius: 30px;
+  background: var(--color-principal);
+  color: white;
+  text-decoration: none;
+  width: 90%;
+}
+
+.hidden { display: none; }
+
+/* BOTÓN DE MÚSICA */
+#musicButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: var(--color-principal);
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,.3);
+  z-index: 999;
+}
+
+/* MENSAJE */
+#musicHint {
+  position: fixed;
+  bottom: 85px;
+  right: 15px;
+  background: rgba(0,0,0,.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  animation: fadeOut 6s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="invitation">
+  <h1>Mi Bautizo</h1>
+  <h2>Nombre del Bebé</h2>
+
+  <p>
+    Domingo 15 de Marzo de 2026<br>
+    12:00 PM<br>
+    Iglesia San José
+  </p>
+
+  <div class="countdown" id="countdown"></div>
+
+  <a href="https://maps.app.goo.gl/HqaQqJGLMuagz9q4A?g_st=iw" target="_blank">📍 Ver ubicación</a>
+  <a href="https://wa.me/5217294773741?text=Muchas%20gracias%20por%20la%20invitación,%20con%20mucho%20gusto%20asistiré" target="_blank">
+    💬 Confirmar asistencia
+    </a>
+    
+</div>
+
+<div class="card hidden" id="expired">
+  <h1>Gracias</h1>
+  <p>Esta invitación ya no está disponible.</p>
+</div>
+
+<div id="musicHint">🎶 Toca la pantalla para escuchar la música</div>
+<div id="musicButton">🎵</div>
+
+<audio id="music" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// =====================
+// CONFIGURACIÓN
+// =====================
+const EVENT_DATE = new Date("April 15, 2026 12:00:00").getTime();
+
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+const countdownEl = document.getElementById("countdown");
+const invitation = document.getElementById("invitation");
+const expired = document.getElementById("expired");
+
+let playing = false;
+
+// INICIAR MÚSICA CON PRIMER TOQUE
+document.addEventListener("click", () => {
+  if (!playing) {
+    music.play().catch(() => {});
+    playing = true;
+    document.getElementById("musicHint").style.display = "none";
+  }
+}, { once: true });
+
+// BOTÓN FLOTANTE
+musicButton.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (playing) {
+    music.pause();
+  } else {
+    music.play();
+  }
+  playing = !playing;
+});
+
+// CUENTA REGRESIVA
+setInterval(() => {
+  const diff = EVENT_DATE - new Date().getTime();
+
+  if (diff <= 0) {
+    invitation.classList.add("hidden");
+    expired.classList.remove("hidden");
+    music.pause();
+    return;
+  }
+
+  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const m = Math.floor((diff / (1000 * 60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  countdownEl.textContent = `Faltan ${d} días ${h}h ${m}m ${s}s`;
+}, 1000);
+</script>
+
+</body>
+</html>
