@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Bautizo</title>
+
+<style>
+:root{
+  --rosa:#f6c1d1;
+  --lila:#e7d8f7;
+  --menta:#dff3ea;
+  --crema:#fff3da;
+  --durazno:#fde0d2;
+  --texto:#6b5b53;
+}
+
+body{
+  margin:0;
+  font-family:'Georgia', serif;
+  background:url('fondo.jpg') center/cover;
+}
+
+/* MODAL */
+#welcome{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+#welcomeBox{
+  background:white;
+  padding:35px;
+  border-radius:30px;
+  text-align:center;
+  box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+#welcomeBox button{
+  margin-top:20px;
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:var(--rosa);
+  color:white;
+  font-size:1em;
+  cursor:pointer;
+}
+
+/* CONTENEDOR */
+#invitation{
+  display:none;
+  padding:20px;
+}
+
+/* SECCIONES */
+.section{
+  width:100%;
+  min-height:100vh;          /* cada sección ocupa la pantalla */
+  margin:0;
+  padding:60px 20px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  /* quitar efecto container */
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  background-color:transparent;
+}
+
+
+
+
+.section h1, .section h2{
+  color:var(--texto);
+}
+.section p{
+  color:var(--texto);
+  line-height:1.7;
+}
+
+/* SECCIONES CON IMAGEN */
+.s1{ background-image:url('sec1.png'); }
+.s2{ background-image:url('sec2.jpg'); }
+.s3{ background-image:url('sec3.jpg'); }
+.s4{ background-image:url('sec4.jpg'); }
+.s5{ background-image:url('sec5.jpg'); }
+.s6{ background-image:url('sec6.jpg'); }
+.s7{ background-image:url('sec7.jpg'); }
+
+
+
+/* BOTONES */
+a{
+  display:block;
+  margin:10px auto;
+  padding:14px;
+  border-radius:30px;
+  background:white;
+  color:var(--texto);
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* MÚSICA */
+#musicButton{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:var(--rosa);
+  color:white;
+  font-size:24px;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+/* ANIMACIONES */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* CLASES */
+.animate {
+  animation: fadeUp 1.2s ease forwards;
+}
+
+.pulse {
+  animation: softPulse 3s ease-in-out infinite;
+}
+</style>
+
+
+
+</head>
+
+<body>
+
+<!-- BIENVENIDA -->
+<div id="welcome">
+  <div id="welcomeBox">
+    <h2>Invitación a mi celebración</h2>
+    <button onclick="enterInvitation()">Entrar</button>
+  </div>
+</div>
+
+<!-- INVITACIÓN -->
+<div id="invitation">
+
+  <!-- 1 -->
+  <div class="section s1">
+    <h1 class="animate">MI BAUTIZO</h1>
+<h2 class="animate pulse">Nombre de la Bebé</h2>
+
+  </div>
+
+  <!-- 2 -->
+  <div class="section s2">
+    <p class="animate">
+      “Dejen que los niños vengan a mí,<br>
+      porque de ellos es el Reino de los Cielos.”<br>
+      <strong>Mateo 19:14</strong>
+    </p>
+  </div>
+
+  <!-- 3 -->
+  <div class="section s3">
+    <p>
+      Con la bendición de Dios y el amor de mis padres:<br><br>
+      <strong>Mamá:</strong> Nombre de mamá<br>
+      <strong>Papá:</strong> Nombre de papá<br><br>
+      <strong>Padrinos:</strong><br>
+      Nombre padrino & Nombre madrina
+    </p>
+  </div>
+
+  <!-- 4 -->
+  <div class="section s4">
+    <h2>Faltan</h2>
+    <p id="countdown"></p>
+  </div>
+
+  <!-- 5 -->
+  <div class="section s5">
+    <h2>Ceremonia Religiosa</h2>
+    <p>
+      Sábado 25 de abril de 2026<br>
+      12:00 PM<br>
+      Iglesia Parroquia de la Asunción de María<br>
+      Xalatlaco, Estado de México
+    </p>
+    <a href="https://maps.app.goo.gl/Yg7mYUu2oKA1p39G7" target="_blank">📍 Ver Iglesia</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="section s6">
+    <h2>Recepción</h2>
+    <p>
+      Salón / Domicilio<br>
+      Dirección de la recepción
+    </p>
+    <a href="https://maps.app.goo.gl/HqaQqJGLMuagz9q4A" target="_blank">📍 Ver Recepción</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="section s7">
+    <h2>Confirmar asistencia</h2>
+    <a href="https://wa.me/5217294773741?text=Muchas%20gracias%20por%20la%20invitación,%20con%20mucho%20gusto%20asistiré" target="_blank">
+      💬 Confirmar por WhatsApp
+    </a>
+  </div>
+
+</div>
+
+<div id="musicButton" onclick="toggleMusic()">🎵</div>
+
+<audio id="music" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const EVENT_DATE = new Date("April 25, 2026 12:00:00").getTime();
+const music = document.getElementById("music");
+const countdownEl = document.getElementById("countdown");
+let playing=false;
+
+function enterInvitation(){
+  document.getElementById("welcome").style.display="none";
+  document.getElementById("invitation").style.display="block";
+  music.play();
+  playing=true;
+  document.getElementById("musicButton").style.display="flex";
+}
+
+function toggleMusic(){
+  playing ? music.pause() : music.play();
+  playing=!playing;
+}
+
+setInterval(()=>{
+  const diff=EVENT_DATE-new Date().getTime();
+  if(diff<=0){
+    countdownEl.textContent="¡Hoy es el gran día!";
+    return;
+  }
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff/(1000*60*60))%24);
+  const m=Math.floor((diff/(1000*60))%60);
+  const s=Math.floor((diff/1000)%60);
+  countdownEl.textContent=`${d} días ${h}h ${m}m ${s}s`;
+},1000);
+</script>
+
+</body>
+</html>
